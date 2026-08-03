@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarandeep Dhir — Finance & Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#080810;
+  --ink2:#0f0f1a;
+  --ink3:#161624;
+  --ink4:#1e1e2e;
+  --gold:#b8960c;
+  --gold-lt:#d4ac2a;
+  --gold-bg:rgba(184,150,12,0.08);
+  --gold-bd:rgba(184,150,12,0.2);
+  --white:#ffffff;
+  --w80:rgba(255,255,255,0.8);
+  --w60:rgba(255,255,255,0.6);
+  --w40:rgba(255,255,255,0.4);
+  --w15:rgba(255,255,255,0.15);
+  --w08:rgba(255,255,255,0.08);
+  --w04:rgba(255,255,255,0.04);
+  --line:rgba(255,255,255,0.06);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--ink);color:var(--white);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:64px;padding:0 60px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,16,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:0.5px solid var(--line);
+  transition:background 0.3s;
+}
+.n-logo{
+  font-family:var(--serif);font-size:18px;font-weight:700;
+  color:var(--white);letter-spacing:0.02em;text-decoration:none;
+}
+.n-logo span{color:var(--gold-lt)}
+.n-links{display:flex;gap:36px;list-style:none}
+.n-links a{
+  font-size:13px;font-weight:400;color:var(--w40);
+  text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;
+  transition:color 0.2s;
+}
+.n-links a:hover{color:var(--white)}
+.n-btn{
+  font-family:var(--sans);font-size:12px;font-weight:500;
+  color:var(--gold-lt);border:0.5px solid var(--gold-bd);
+  padding:9px 22px;border-radius:2px;text-decoration:none;
+  letter-spacing:0.1em;text-transform:uppercase;
+  transition:background 0.2s,color 0.2s;
+}
+.n-btn:hover{background:var(--gold-bg);color:var(--white)}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+.hero-left{
+  padding:140px 60px 80px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-right:0.5px solid var(--line);
+  position:relative;z-index:1;
+}
+.hero-right{
+  position:relative;overflow:hidden;
+  background:var(--ink2);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:60px;
+}
+.hero-photo-circle{
+  width:min(320px, 60%);
+  aspect-ratio:1/1;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid var(--gold-bd);
+  box-shadow:0 0 0 10px rgba(184,150,12,0.04), 0 20px 60px rgba(0,0,0,0.4);
+  margin-bottom:36px;
+  flex-shrink:0;
+}
+.hero-photo-circle img{
+  width:100%;height:100%;object-fit:cover;object-position:center 30%;
+  display:block;
+}
+.photo-placeholder-text{
+  font-size:11px;color:var(--w15);letter-spacing:0.2em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;background:var(--ink3);text-align:center;padding:20px;
+}
+.hero-label{
+  font-family:var(--mono);font-size:11px;color:var(--gold);
+  letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:32px;display:flex;align-items:center;gap:12px;
+}
+.hero-label::before{content:'';width:32px;height:1px;background:var(--gold)}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(56px,6.5vw,96px);
+  font-weight:700;line-height:0.9;
+  letter-spacing:-0.02em;
+  color:var(--white);
+  margin-bottom:32px;
+}
+.hero-h1 em{
+  font-style:italic;color:var(--gold-lt);
+  display:block;font-weight:400;
+}
+.hero-divider{
+  width:48px;height:1px;background:var(--gold);
+  margin-bottom:28px;
+}
+.hero-desc{
+  font-size:16px;font-weight:300;color:var(--w60);
+  line-height:1.85;max-width:460px;margin-bottom:48px;
+}
+.hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.btn-gold{
+  background:var(--gold);color:var(--ink);
+  font-family:var(--sans);font-size:12px;font-weight:500;
+  padding:14px 32px;border-radius:2px;text-decoration:none;
+  letter-spacing:0.12em;text-transform:uppercase;
+  transition:background 0.2s;display:inline-block;
+}
+.btn-gold:hover{background:var(--gold-lt)}
+.btn-outline{
+  color:var(--w60);font-size:13px;text-decoration:none;
+  display:flex;align-items:center;gap:8px;letter-spacing:0.04em;
+  transition:color 0.2s;
+}
+.btn-outline:hover{color:var(--white)}
+.btn-outline::after{content:'→';color:var(--gold)}
+
+/* HERO RIGHT STATS */
+.hero-stats-overlay{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--line);width:100%;max-width:420px;
+}
+.hs{
+  background:var(--ink3);
+  padding:20px 24px;
+  text-align:center;
+}
+.hs-n{
+  font-family:var(--serif);font-size:32px;font-weight:700;
+  color:var(--gold-lt);line-height:1;margin-bottom:4px;
+}
+.hs-l{
+  font-family:var(--mono);font-size:10px;color:var(--w40);
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+.hero-tag-row{
+  position:relative;z-index:2;
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;
+  justify-content:center;max-width:420px;
+}
+.hero-tag{
+  font-family:var(--mono);font-size:10px;color:var(--gold);
+  background:var(--gold-bg);border:0.5px solid var(--gold-bd);
+  padding:4px 12px;border-radius:1px;letter-spacing:0.1em;text-transform:uppercase;
+}
+
+/* TICKER */
+.ticker{
+  background:var(--gold);padding:12px 0;
+  overflow:hidden;white-space:nowrap;
+  border-top:none;border-bottom:none;
+}
+.ticker-inner{
+  display:inline-flex;animation:ticker 20s linear infinite;
+}
+.ticker-item{
+  font-family:var(--mono);font-size:11px;font-weight:400;
+  color:var(--ink);letter-spacing:0.14em;text-transform:uppercase;
+  padding:0 40px;
+}
+.ticker-sep{color:rgba(0,0,0,0.3)}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.sec{padding:120px 60px}
+.sec-alt{background:var(--ink2)}
+.sec-sm{padding:80px 60px}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;color:var(--gold);
+  letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:16px;display:flex;align-items:center;gap:14px;
+}
+.eyebrow::after{content:'';flex:1;height:0.5px;background:var(--gold-bd);max-width:60px}
+.sec-h2{
+  font-family:var(--serif);
+  font-size:clamp(36px,4vw,56px);
+  font-weight:700;line-height:1.05;
+  color:var(--white);margin-bottom:64px;
+  letter-spacing:-0.01em;
+}
+.sec-h2 em{font-style:italic;color:var(--gold-lt)}
+
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 400px;gap:80px;align-items:start}
+.about-lead{
+  font-family:var(--serif);font-size:22px;font-weight:400;
+  color:var(--white);line-height:1.6;margin-bottom:32px;font-style:italic;
+}
+.about-body{font-size:15px;color:var(--w60);line-height:1.9}
+.about-body p+p{margin-top:18px}
+.about-sidebar{}
+.sidebar-card{
+  background:var(--ink3);border:0.5px solid var(--line);
+  padding:0;margin-bottom:1px;
+}
+.sc-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:16px 20px;border-bottom:0.5px solid var(--line);
+}
+.sc-row:last-child{border-bottom:none}
+.sc-label{font-family:var(--mono);font-size:11px;color:var(--w40);letter-spacing:0.1em;text-transform:uppercase}
+.sc-val{font-size:13px;color:var(--white);font-weight:400;text-align:right;max-width:200px;line-height:1.4}
+
+/* CREDENTIALS */
+.creds-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px}
+.creds-count{font-family:var(--serif);font-size:72px;font-weight:700;color:var(--ink3);line-height:1;letter-spacing:-0.03em;user-select:none}
+.creds-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.cred{
+  background:var(--ink2);padding:0;
+  position:relative;overflow:hidden;
+  transition:background 0.25s;cursor:default;
+  display:flex;flex-direction:column;
+}
+.cred-photo{
+  width:100%;aspect-ratio:4/3;overflow:hidden;
+  background:var(--ink3);border-bottom:0.5px solid var(--line);
+}
+.cred-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;}
+.cred:hover .cred-photo img{transform:scale(1.05)}
+.cred-body{padding:24px 24px 28px;flex:1}
+.cred:hover{background:var(--ink3)}
+.cred::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-lt));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
+}
+.cred:hover::after{transform:scaleX(1)}
+.cred-num{
+  font-family:var(--mono);font-size:11px;color:var(--w15);
+  letter-spacing:0.12em;margin-bottom:20px;
+}
+.cred-org{
+  font-family:var(--mono);font-size:10px;color:var(--gold);
+  letter-spacing:0.14em;text-transform:uppercase;margin-bottom:10px;
+}
+.cred-name{
+  font-family:var(--serif);font-size:16px;font-weight:700;
+  color:var(--white);line-height:1.35;margin-bottom:12px;
+}
+.cred-meta{font-size:12px;color:var(--w40);line-height:1.5}
+
+/* PROJECTS */
+.projects-wrap{}
+.proj{
+  display:grid;grid-template-columns:1fr 420px;gap:80px;
+  align-items:center;padding:80px 0;
+  border-bottom:0.5px solid var(--line);
+}
+.proj:first-child{border-top:0.5px solid var(--line)}
+.proj:nth-child(even){direction:rtl}
+.proj:nth-child(even) .proj-body{direction:ltr}
+.proj:nth-child(even) .proj-visual{direction:ltr}
+.proj-eyebrow{
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;
+}
+.proj-n{
+  font-family:var(--mono);font-size:11px;color:var(--w15);
+  letter-spacing:0.12em;
+}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px}
+.proj-tag{
+  font-family:var(--mono);font-size:10px;color:var(--gold);
+  background:var(--gold-bg);border:0.5px solid var(--gold-bd);
+  padding:3px 10px;border-radius:1px;letter-spacing:0.08em;text-transform:uppercase;
+}
+.proj-name{
+  font-family:var(--serif);font-size:32px;font-weight:700;
+  color:var(--white);line-height:1.1;margin-bottom:16px;letter-spacing:-0.01em;
+}
+.proj-name em{font-style:italic;color:var(--gold-lt)}
+.proj-desc{font-size:14px;color:var(--w60);line-height:1.85}
+.proj-visual{
+  aspect-ratio:16/10;background:var(--ink3);
+  border:0.5px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;color:var(--w15);
+  letter-spacing:0.15em;text-transform:uppercase;
+  position:relative;overflow:hidden;
+}
+.proj-visual::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 50%,rgba(184,150,12,0.05),transparent 60%);
+}
+.proj-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* EXPERIENCE */
+.exp-grid{display:grid;grid-template-columns:280px 1fr;gap:80px;align-items:start}
+.exp-sidebar{}
+.exp-sidebar-title{
+  font-family:var(--serif);font-size:18px;font-style:italic;
+  color:var(--w40);line-height:1.4;margin-bottom:40px;
+}
+.exp-years{
+  font-family:var(--serif);font-size:64px;font-weight:700;
+  color:var(--ink3);line-height:1;letter-spacing:-0.03em;
+}
+.exp-list{}
+.exp-item{
+  padding:36px 0;border-bottom:0.5px solid var(--line);
+  display:grid;grid-template-columns:140px 1fr;gap:32px;
+}
+.exp-item:first-child{border-top:0.5px solid var(--line)}
+.exp-period{
+  font-family:var(--mono);font-size:11px;color:var(--w40);
+  letter-spacing:0.08em;padding-top:3px;
+}
+.exp-body{}
+.exp-role{
+  font-family:var(--serif);font-size:18px;font-weight:700;
+  color:var(--white);margin-bottom:3px;
+}
+.exp-org{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px}
+.exp-pts{list-style:none;display:flex;flex-direction:column;gap:7px}
+.exp-pts li{
+  font-size:13px;color:var(--w60);line-height:1.6;
+  padding-left:16px;position:relative;
+}
+.exp-pts li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:1px;background:var(--gold)}
+
+/* SKILLS */
+.skills-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.skill-group{background:var(--ink);padding:40px 36px}
+.sg-title{
+  font-family:var(--mono);font-size:11px;color:var(--gold);
+  letter-spacing:0.18em;text-transform:uppercase;
+  margin-bottom:24px;padding-bottom:16px;
+  border-bottom:0.5px solid var(--gold-bd);
+}
+.sg-items{display:flex;flex-direction:column;gap:10px}
+.sg-item{
+  font-size:14px;color:var(--w60);
+  display:flex;align-items:center;gap:10px;
+}
+.sg-item::before{content:'';width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0}
+
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.contact-lead{
+  font-family:var(--serif);font-size:20px;font-style:italic;
+  color:var(--w60);line-height:1.7;margin-bottom:48px;
+}
+.contact-details{display:flex;flex-direction:column;gap:0}
+.cd-item{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:16px 0;border-bottom:0.5px solid var(--line);
+}
+.cd-label{font-family:var(--mono);font-size:11px;color:var(--w40);letter-spacing:0.1em;text-transform:uppercase}
+.cd-val{font-size:14px;color:var(--white)}
+.contact-form{display:flex;flex-direction:column;gap:0;background:var(--ink3);padding:40px;border:0.5px solid var(--line)}
+.cf-group{margin-bottom:24px}
+.cf-label{font-family:var(--mono);font-size:10px;color:var(--w40);letter-spacing:0.14em;text-transform:uppercase;display:block;margin-bottom:8px}
+.cf-input{
+  width:100%;background:transparent;border:none;border-bottom:0.5px solid var(--line);
+  color:var(--white);font-family:var(--sans);font-size:14px;font-weight:300;
+  padding:10px 0;outline:none;transition:border-color 0.2s;
+}
+.cf-input:focus{border-color:var(--gold)}
+.cf-input::placeholder{color:var(--w15)}
+.cf-submit{
+  background:var(--gold);color:var(--ink);
+  font-family:var(--sans);font-size:12px;font-weight:500;
+  padding:14px 32px;border:none;border-radius:2px;cursor:pointer;
+  letter-spacing:0.12em;text-transform:uppercase;
+  transition:background 0.2s;width:100%;margin-top:8px;
+}
+.cf-submit:hover{background:var(--gold-lt)}
+
+/* FOOTER */
+footer{
+  padding:32px 60px;
+  border-top:0.5px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.f-name{font-family:var(--serif);font-size:16px;color:var(--w40)}
+.f-right{display:flex;gap:32px;align-items:center}
+.f-link{font-family:var(--mono);font-size:11px;color:var(--w40);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s}
+.f-link:hover{color:var(--gold)}
+.f-copy{font-family:var(--mono);font-size:10px;color:var(--w15);letter-spacing:0.08em}
+
+.cred-photo{cursor:zoom-in}
+.lightbox{
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(5,5,10,0.92);
+  align-items:center;justify-content:center;
+  padding:40px;cursor:zoom-out;
+}
+.lightbox.active{display:flex}
+.lightbox img{
+  max-width:90vw;max-height:90vh;
+  border-radius:4px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+.lightbox-close{
+  position:absolute;top:24px;right:32px;
+  font-family:var(--sans);font-size:14px;color:var(--w60);
+  background:var(--ink3);border:0.5px solid var(--line);
+  padding:8px 18px;border-radius:2px;cursor:pointer;
+  letter-spacing:0.08em;text-transform:uppercase;
+}
+.lightbox-close:hover{color:var(--white)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="n-logo">TD<span>.</span></a>
+  <ul class="n-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="resume.pdf" target="_blank" rel="noopener" class="n-btn">Resume ↓</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-label">Portfolio · 2025</div>
+    <h1 class="hero-h1">Tarandeep<em>Dhir</em></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">Finance student and technologist. Incoming BBA candidate at City College of New York, with hands-on experience in computer repair, network infrastructure, and software development.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-gold">View Work</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-circle">
+      <img src="profile.jpg" alt="Tarandeep Dhir">
+    </div>
+    <div class="hero-tag-row">
+      <span class="hero-tag">BBA Finance · CCNY</span>
+      <span class="hero-tag">Queens Technical HS</span>
+      <span class="hero-tag">New York, NY</span>
+    </div>
+      <div class="hero-stats-overlay">
+        <div class="hs"><div class="hs-n">9</div><div class="hs-l">Credentials</div></div>
+        <div class="hs"><div class="hs-n">3</div><div class="hs-l">Projects Built</div></div>
+        <div class="hs"><div class="hs-n">2×</div><div class="hs-l">Honor Roll</div></div>
+        <div class="hs"><div class="hs-n">AP</div><div class="hs-l">CS Principles</div></div>
+      </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Finance &amp; Technology <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">NOCTI Workforce Competency <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Network Cabling Specialist <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Python Developer <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">BBA Finance · CCNY <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Honor Roll 2024 &amp; 2025 <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Honors Journalism <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Community Builder <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Finance &amp; Technology <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">NOCTI Workforce Competency <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Network Cabling Specialist <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Python Developer <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">BBA Finance · CCNY <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Honor Roll 2024 &amp; 2025 <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Honors Journalism <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Community Builder <span class="ticker-sep">·</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="eyebrow">About</div>
+  <div class="about-wrap">
+    <div>
+      <p class="about-lead">"Where finance meets technology — building skills at the intersection of both."</p>
+      <div class="about-body">
+        <p>I am an incoming BBA Finance student at the Colin Powell School, City College of New York. My background is unconventional — I came up through a technical high school where I built computers, terminated network cables, and wrote code before ever opening a finance textbook.</p>
+        <p>That combination is deliberate. I believe the future of finance is technical, and I want to be someone who understands both sides. I have completed coursework in tax simulation, accounting careers, and financial literacy through EVERFI, while holding industry certifications in network cabling and workforce competency from NOCTI.</p>
+        <p>Outside of academics, I write for my school newspaper, volunteer with the Queens Tech Squad, and am building an app to connect people in my community with volunteering and stipend opportunities.</p>
+      </div>
+    </div>
+    <div class="about-sidebar">
+      <div class="sidebar-card">
+        <div class="sc-row"><span class="sc-label">College</span><span class="sc-val">CCNY · Colin Powell School</span></div>
+        <div class="sc-row"><span class="sc-label">Major</span><span class="sc-val">BBA Finance</span></div>
+        <div class="sc-row"><span class="sc-label">High School</span><span class="sc-val">Queens Technical HS</span></div>
+        <div class="sc-row"><span class="sc-label">CTE Pathways</span><span class="sc-val">Computer Repair Tech · CIS</span></div>
+        <div class="sc-row"><span class="sc-label">AP Course</span><span class="sc-val">Computer Science Principles</span></div>
+        <div class="sc-row"><span class="sc-label">Activities</span><span class="sc-val">Honors Journalism · Queens Tech Squad</span></div>
+        <div class="sc-row"><span class="sc-label">Location</span><span class="sc-val">New York, NY</span></div>
+        <div class="sc-row"><span class="sc-label">Email</span><span class="sc-val">dhirtarandeep@gmail.com</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="sec sec-alt" id="credentials">
+  <div class="eyebrow">Credentials &amp; Awards</div>
+  <div class="creds-header">
+    <h2 class="sec-h2" style="margin-bottom:0">What I've <em>earned.</em></h2>
+    <div class="creds-count">09</div>
+  </div>
+  <div class="creds-grid">
+    <div class="cred">
+      <div class="cred-photo" onclick="openLightbox('cert-nocti.jpg')"><img src="cert-nocti.jpg" alt="NOCTI Workforce Competency Credential certificate"></div>
+      <div class="cred-body">
+      <div class="cred-num">01</div>
+      <div class="cred-org">NOCTI</div>
+      <div class="cred-name">Workforce Competency Credential</div>
+      <div class="cred-meta">Computer Repair Technology<br>May 28, 2025 · Expires 2030</div>
+      </div>
+    </div>
+    <div class="cred">
+      <div class="cred-photo" onclick="openLightbox('cert-ncs.jpg')"><img src="cert-ncs.jpg" alt="Network Cabling Specialist certificate"></div>
+      <div class="cred-body">
+      <div class="cred-num">02</div>
+      <div class="cred-org">C-Tech Associates</div>
+      <div class="cred-name">Network Cabling Specialist</div>
+      <div class="cred-meta">Copper-Based Systems<br>Issued March 5, 2026</div>
+      </div>
+    </div>
+    <div class="cred">
+      <div class="cred-photo" onclick="openLightbox('cert-honor-repair.jpg')"><img src="cert-honor-repair.jpg" alt="Honor Roll Computer Repair Technology certificate"></div>
+      <div class="cred-body">
+      <div class="cred-num">03</div>
+      <div class="cred-org">Queens Technical HS</div>
+      <div class="cred-name">Honor Roll — Computer Repair Technology</div>
+      <div class="cred-meta">CTE Department<br>Fall Term 2024</div>
+      </div>
+    </div>
+    <div class="cred">
+      <div class="cred-photo" onclick="openLightbox('cert-honor-cis.jpg')"><img src="cert-honor-cis.jpg" alt="Honor Roll Computer Information Systems certificate"></div>
+      <div class="cred-body">
+      <div class="cred-num">04</div>
+      <div class="cred-org">Queens Technical HS</div>
+      <div class="cred-name">Honor Roll — Computer Information Systems</div>
+      <div class="cred-meta">CTE Department<br>Fall Term 2025</div>
+      </div>
+    </div>
+    <div class="cred">
+      <div class="cred-photo" onclick="openLightbox('cert-tax.jpg')"><img src="cert-tax.jpg" alt="Tax Simulation Understanding Taxes certificate"></div>
+      <div class="cred-body">
+      <div class="cred-num">05</div>
+      <div class="cred-org">Intuit / EVERFI</div>
+      <div class="cred-name">Tax Simulation: Understanding Taxes</div>
+      <div class="cred-meta">Financial Literacy<br>May 30, 2026</div>
+      </div>
+    </div>
+    <div class="cred">
+      <div class="cred-photo" onclick="openLightbox('cert-accounting.jpg')"><img src="cert-accounting.jpg" alt="Accounting Careers Limitless Opportunities certificate"></div>
+      <div class="cred-body">
+      <div class="cred-num">06</div>
+      <div class="cred-org">Accounting+ / EVERFI</div>
+      <div class="cred-name">Accounting Careers: Limitless Opportunities</div>
+      <div class="cred-meta">Career Exploration<br>2026</div>
+      </div>
+    </div>
+    <div class="cred">
+      <div class="cred-photo" onclick="openLightbox('cert-money.jpg')"><img src="cert-money.jpg" alt="Minding Your Money Skills for Life certificate"></div>
+      <div class="cred-body">
+      <div class="cred-num">07</div>
+      <div class="cred-org">Guardian / EVERFI</div>
+      <div class="cred-name">Minding Your Money: Skills for Life</div>
+      <div class="cred-meta">Personal Finance<br>May 31, 2026</div>
+      </div>
+    </div>
+    <div class="cred">
+      <div class="cred-photo" onclick="openLightbox('cert-google.jpg')"><img src="cert-google.jpg" alt="Google Cloud Scaling with Google Cloud Operations skill badge"></div>
+      <div class="cred-body">
+      <div class="cred-num">08</div>
+      <div class="cred-org">Google Cloud</div>
+      <div class="cred-name">Cloud Operations Skill Badge</div>
+      <div class="cred-meta">Scaling with Google Cloud Operations<br>Earned June 2, 2026</div>
+      </div>
+    </div>
+    <div class="cred">
+      <div class="cred-photo" onclick="openLightbox('cert-wise.jpg')"><img src="cert-wise.jpg" alt="W!SE Certified Financially Literate certificate"></div>
+      <div class="cred-body">
+      <div class="cred-num">09</div>
+      <div class="cred-org">W!SE</div>
+      <div class="cred-name">Certified Financially Literate</div>
+      <div class="cred-meta">National Financial Literacy Certification<br>Queens Technical HS · 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="sec" id="projects">
+  <div class="eyebrow">Projects</div>
+  <h2 class="sec-h2">What I've <em>built.</em></h2>
+  <div class="projects-wrap">
+
+    <div class="proj">
+      <div class="proj-body">
+        <div class="proj-eyebrow">
+          <span class="proj-n">01 —</span>
+          <div class="proj-tags">
+            <span class="proj-tag">Hardware</span>
+            <span class="proj-tag">PC Assembly</span>
+            <span class="proj-tag">BIOS</span>
+          </div>
+        </div>
+        <div class="proj-name">Custom PC <em>Build</em></div>
+        <p class="proj-desc">Selected, assembled, and fully configured a desktop PC from individual components. Installed CPU, RAM, motherboard, GPU, storage drives, and PSU. Applied thermal paste, routed cables, navigated BIOS settings, and installed dual Windows operating systems for a stable, fully operational machine.</p>
+      </div>
+      <div class="proj-visual"><img src="proj-pc-build.png" alt="Custom PC Build" style="width:100%;height:100%;object-fit:cover;"/></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-body">
+        <div class="proj-eyebrow">
+          <span class="proj-n">02 —</span>
+          <div class="proj-tags">
+            <span class="proj-tag">RJ45</span>
+            <span class="proj-tag">Coaxial</span>
+            <span class="proj-tag">NCS Certified</span>
+          </div>
+        </div>
+        <div class="proj-name">Cable <em>Termination</em></div>
+        <p class="proj-desc">Terminated both RJ45 Ethernet (Cat5e/Cat6) and coaxial cables using industry-standard tools. Followed T568B wire pair sequencing for Ethernet and applied proper compression fittings for coax. Tested all connections to verify signal continuity — work validated by NCS certification.</p>
+      </div>
+      <div class="proj-visual"><img src="proj-cable.png" alt="RJ45 and Coaxial Cable Termination" style="width:100%;height:100%;object-fit:cover;"/></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-body">
+        <div class="proj-eyebrow">
+          <span class="proj-n">03 —</span>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">GUI</span>
+            <span class="proj-tag">Software</span>
+          </div>
+        </div>
+        <div class="proj-name">Hangman <em>Game</em></div>
+        <p class="proj-desc">Built a fully playable Hangman game using Python with a graphical user interface. The game renders the hangman drawing progressively, tracks correct and incorrect letter guesses, and reveals the hidden word as the player makes correct selections.</p>
+      </div>
+      <div class="proj-visual"><img src="proj-hangman.png" alt="Hangman Python Game with GUI" style="width:100%;height:100%;object-fit:cover;"/></div>
+    </div>
+
+    <div class="proj">
+      <div class="proj-body">
+        <div class="proj-eyebrow">
+          <span class="proj-n">04 —</span>
+          <div class="proj-tags">
+            <span class="proj-tag">Community</span>
+            <span class="proj-tag">App Dev</span>
+            <span class="proj-tag">Six-Week Build</span>
+          </div>
+        </div>
+        <div class="proj-name">GoodNest<em> App</em></div>
+        <p class="proj-desc">A community service board that helps people find volunteer and stipend-based opportunities near them. Built over six weeks with a partner, GoodNest lets users browse and filter listings by category, organization, and opportunity type, all in a warm, welcoming interface. Born from firsthand experience navigating how hard it can be to find these opportunities as a young person.</p>
+      </div>
+      <div class="proj-visual"><img src="proj-goodnest.png" alt="GoodNest community service board app" style="width:100%;height:100%;object-fit:cover;"/></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="sec sec-alt" id="experience">
+  <div class="eyebrow">Experience</div>
+  <h2 class="sec-h2">Where I've <em>worked.</em></h2>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-period">2024 – 2025</div>
+      <div class="exp-body">
+        <div class="exp-role">Work-Based Learning — Computer Repairs</div>
+        <div class="exp-org">Queens Technical HS · CTE Program</div>
+        <ul class="exp-pts">
+          <li>Completed hands-on WBL hours performing real-world computer repair under professional supervision</li>
+          <li>Diagnosed and resolved hardware failures including RAM, hard drives, power supplies, and cooling systems</li>
+          <li>Troubleshot OS errors, driver conflicts, and malware on real machines</li>
+          <li>Terminated Ethernet (Cat5e/Cat6) and coaxial cables to industry standards</li>
+          <li>Navigated BIOS and installed dual Windows operating systems</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-period">2024 – 2026</div>
+      <div class="exp-body">
+        <div class="exp-role">Queens Tech Squad</div>
+        <div class="exp-org">Queens Technical High School</div>
+        <ul class="exp-pts">
+          <li>Volunteered to introduce the CTE Computer Repair program to prospective students and families</li>
+          <li>Represented the school at outreach events, explaining hands-on technical skills and career pathways</li>
+          <li>Collaborated with peers and instructors to build demonstrations of repair tools and techniques</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-period">2024 – 2026</div>
+      <div class="exp-body">
+        <div class="exp-role">Staff Writer</div>
+        <div class="exp-org">Honors Journalism · Queens Technical High School</div>
+        <ul class="exp-pts">
+          <li>Two articles published in the school newspaper</li>
+          <li>Developed research, interviewing, and editorial communication skills</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="sec" id="skills">
+  <div class="eyebrow">Skills</div>
+  <h2 class="sec-h2">What I <em>know.</em></h2>
+  <div class="skills-wrap">
+    <div class="skill-group">
+      <div class="sg-title">Finance</div>
+      <div class="sg-items">
+        <div class="sg-item">Money management &amp; budgeting</div>
+        <div class="sg-item">Investment fundamentals</div>
+        <div class="sg-item">Tax literacy</div>
+        <div class="sg-item">Financial planning</div>
+        <div class="sg-item">Accounting fundamentals</div>
+        <div class="sg-item">Financial literacy</div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Technology</div>
+      <div class="sg-items">
+        <div class="sg-item">PC building &amp; assembly</div>
+        <div class="sg-item">Hardware repair &amp; diagnostics</div>
+        <div class="sg-item">Python programming</div>
+        <div class="sg-item">Network cabling (RJ45 + coaxial)</div>
+        <div class="sg-item">BIOS configuration</div>
+        <div class="sg-item">Google Cloud operations</div>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="sg-title">Professional</div>
+      <div class="sg-items">
+        <div class="sg-item">Written communication</div>
+        <div class="sg-item">Time management</div>
+        <div class="sg-item">Community outreach</div>
+        <div class="sg-item">Team collaboration</div>
+        <div class="sg-item">Journalism &amp; editing</div>
+        <div class="sg-item">App development</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec sec-alt" id="contact">
+  <div class="eyebrow">Contact</div>
+  <h2 class="sec-h2">Let's <em>connect.</em></h2>
+  <div class="contact-wrap">
+    <div>
+      <p class="contact-lead">Open to internships, shadowing opportunities, and conversations with people building at the intersection of finance and technology.</p>
+      <div class="contact-details">
+        <div class="cd-item"><span class="cd-label">Email</span><span class="cd-val">dhirtarandeep@gmail.com</span></div>
+        <div class="cd-item"><span class="cd-label">Phone</span><span class="cd-val">929-528-2785</span></div>
+        <div class="cd-item"><span class="cd-label">Location</span><span class="cd-val">New York, NY</span></div>
+        <div class="cd-item"><span class="cd-label">College</span><span class="cd-val">CCNY · Colin Powell School</span></div>
+      </div>
+    </div>
+    <form class="contact-form" id="contact-form" onsubmit="return sendContactForm(event)">
+      <div class="cf-group">
+        <label class="cf-label">Name</label>
+        <input type="text" name="name" id="cf-name" class="cf-input" placeholder="Your name" required>
+      </div>
+      <div class="cf-group">
+        <label class="cf-label">Email</label>
+        <input type="email" name="email" id="cf-email" class="cf-input" placeholder="your@email.com" required>
+      </div>
+      <div class="cf-group">
+        <label class="cf-label">Message</label>
+        <textarea name="message" id="cf-message" class="cf-input" rows="4" placeholder="Hi Tarandeep..." required></textarea>
+      </div>
+      <button type="submit" class="cf-submit" id="cf-submit-btn">Send Message</button>
+      <div id="cf-status" style="margin-top:14px;font-size:13px;font-family:var(--sans);display:none;"></div>
+    </form>
+    <script>
+      function sendContactForm(e) {
+        e.preventDefault();
+        const form = document.getElementById('contact-form');
+        const btn = document.getElementById('cf-submit-btn');
+        const status = document.getElementById('cf-status');
+        const formData = new FormData(form);
+
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+
+        fetch('https://formspree.io/f/YOUR_FORM_ID', {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        }).then(response => {
+          if (response.ok) {
+            status.style.display = 'block';
+            status.style.color = '#4ade80';
+            status.textContent = 'Message sent! I\'ll get back to you soon.';
+            form.reset();
+          } else {
+            status.style.display = 'block';
+            status.style.color = '#f87171';
+            status.textContent = 'Something went wrong. Please email dhirtarandeep@gmail.com directly.';
+          }
+        }).catch(() => {
+          status.style.display = 'block';
+          status.style.color = '#f87171';
+          status.textContent = 'Something went wrong. Please email dhirtarandeep@gmail.com directly.';
+        }).finally(() => {
+          btn.textContent = 'Send Message';
+          btn.disabled = false;
+        });
+
+        return false;
+      }
+    </script>
+  </div>
+</section>
+
+<footer>
+  <div class="f-name">Tarandeep Dhir</div>
+  <div class="f-right">
+    <span class="f-copy">© 2025 · New York, NY</span>
+    <a href="mailto:dhirtarandeep@gmail.com" class="f-link">Email</a>
+    <a href="resume.pdf" target="_blank" rel="noopener" class="f-link">Resume</a>
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-close" onclick="closeLightbox()">Close ✕</div>
+  <img id="lightbox-img" src="" alt="Enlarged certificate" onclick="event.stopPropagation()">
+</div>
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+</body>
+</html>
